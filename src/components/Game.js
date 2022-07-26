@@ -83,10 +83,9 @@ class Game extends React.Component {
   };
 
   render() {
-    const gameStatus = this.calcGameStatus;
     return (
       <View style={styles.container}>
-        <Text style={[styles.target, styles[`STATUS_${this.gameState}`]]}>
+        <Text style={[styles.target, styles[`STATUS_${this.gameStatus}`]]}>
           {this.target}
         </Text>
         <View style={styles.randomContainer}>
@@ -103,12 +102,14 @@ class Game extends React.Component {
           ))}
         </View>
         <>
-          {this.gameStatus != 'PLAYING' && (
+          {this.gameStatus !== 'PLAYING' && (
             <Button title="Play Again" onPress={this.props.onPlayAgain} />
           )}
 
           <Text>{this.state.remainingSeconds}</Text>
-          <Text>{this.gameStatus}</Text>
+          <Text style={[styles.target, styles[`STATUS_${this.gameStatus}`]]}>
+            {this.gameStatus}
+          </Text>
         </>
       </View>
     );
@@ -133,22 +134,14 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
   },
-  random: {
-    backgroundColor: 'deeppink',
-    width: 100,
-    marginHorizontal: 15,
-    marginVertical: 25,
-    fontSize: 35,
-    textAlign: 'center',
-  },
   selected: {
     opacity: 0.3,
   },
   STATUS_PLAYING: {
-    backgroundColor: 'lightblue',
+    backgroundColor: 'deeppink',
   },
   STATUS_WON: {
-    backgroundColor: 'green',
+    backgroundColor: 'lightgreen',
   },
   STATUS_LOST: {
     backgroundColor: 'red',
